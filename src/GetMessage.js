@@ -9,10 +9,9 @@ class GetMessage extends React.Component {
   seeMsg = () => {
     const requestOptions ={
       method: 'GET',
-      headers:{'Content-Type': 'application/json'},
-      body: JSON.stringify({"partition_key1":1})
+      headers:{'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
     };
-      fetch('https://769qg6p65h.execute-api.ap-northeast-1.amazonaws.com/dbread')
+      fetch('https://769qg6p65h.execute-api.ap-northeast-1.amazonaws.com/dbread?partition_key1=1', requestOptions)
       .then((response)=> response.json())
       .then((responseJson) =>{
         console.log(responseJson)
