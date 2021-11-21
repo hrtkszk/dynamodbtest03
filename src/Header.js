@@ -21,6 +21,9 @@ class Menu extends React.Component {
             <Link to='/setting' className="link">
               <p className="navItem">設定</p>
             </Link>
+            <Link to='/test' className="link">
+              <p className="navItem">テスト</p>
+            </Link>
           </div>
         </header>
 

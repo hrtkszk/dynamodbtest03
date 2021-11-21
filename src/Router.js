@@ -6,6 +6,7 @@ import Search from './Search.js'
 import Find from './Find.js'
 import Message from './Message.js'
 import Setting from './Setting.js'
+import Test from './Test.js'
 
 class Router extends React.Component {
   render() {
@@ -17,6 +18,7 @@ class Router extends React.Component {
             <Route exact path="/find" element={<Find/>}/>
             <Route exact path="/message" element={<Message/>}/>
             <Route exact path="/setting" element={<Setting/>}/>
+            <Route exact path="/test" element={<Test/>}/>
           </Routes>
         </div>
     )
