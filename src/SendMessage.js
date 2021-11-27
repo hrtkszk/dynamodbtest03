@@ -5,7 +5,7 @@ import Button from './Button';
 class SendMessage extends React.Component {
     state = {
       message: '',
-      image:''
+      image:'aaa'
     }
     onChange = (key, value) => {
       //this.props.updateErrorMessage(null)
