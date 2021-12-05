@@ -1,16 +1,80 @@
 import './Message.css';
 import React from 'react';
-import SendMessage from './SendMessage';
-import GetMessage from './GetMessage';
+import Button from './Button';
 
 class Message extends React.Component {
+  state = {
+    Messages: [],
+    sendMessage: '',
+    image:'noImage'
+  }
+  onChange = (key, value) => {
+    //this.props.updateErrorMessage(null)
+    this.setState({
+      [key]: value
+    })
+  }
+  sendMsg = () => {
+    const requestOptions ={
+      method: 'POST',
+      headers:{'Content-Type': 'application/json'},
+      body: JSON.stringify({"id":"aaaa","sendTo":"bbbb","message":this.state.sendMessage,"image":this.state.image})
+    };
+    fetch("https://skbwb0u423.execute-api.ap-northeast-1.amazonaws.com/dev_amp_db",requestOptions)
+    .then((response)=> response.json())
+    .then((responseJson) =>{
+      console.log(responseJson)
+      this.componentDidMount()
+      this.setState({sendMessage:""})
+      console.log(this.state.sendMessage)
+      this.render()
+    })
+
+  }
+  
+  componentDidMount() {
+    const requestOptions ={
+      method: 'POST',
+      headers:{'Content-Type': 'application/json'},
+      body: JSON.stringify({"id":"aaaa"})
+    };
+    fetch("https://769qg6p65h.execute-api.ap-northeast-1.amazonaws.com/dbread",requestOptions)
+    .then(response=> response.json())
+    .then(result =>{
+      console.log(result)
+      this.setState({Messages:result.body})
+    })
+    //this.interval = setInterval(()=>this.componentDidMount(), 30000);
+  }
+  componentWillUnmount() {
+    //clearInterval(this.interval);
+  }
+
   render() {
     return (
       <div className="App">
         <div className="App-header">
-            <GetMessage />
+          <ul>
+            {this.state.Messages.map((Message, i) => {
+              console.log(this.state.Messages)
+              return <li key={Message.message}>{Message.message}</li>;
+            })}
+          </ul>
         </div>
-        <SendMessage />
+        <div className="App">
+            <footer className="App-footer">
+                <input
+                  id="sendMessage"
+                  onChange={evt => this.onChange('sendMessage', evt.target.value)}
+                  className="input"
+                  placeholder='メッセージ'
+                />
+                <Button
+                  title="Send"
+                  onClick={this.sendMsg}
+                />
+            </footer>
+        </div>
       </div>
     )
   }

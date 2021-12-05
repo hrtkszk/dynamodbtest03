@@ -9,7 +9,7 @@ class GetMessage extends React.Component {
     const requestOptions ={
       method: 'POST',
       headers:{'Content-Type': 'application/json'},
-      body: JSON.stringify({"partition_key1":2})
+      body: JSON.stringify({"id":"aaaa"})
     };
     fetch("https://769qg6p65h.execute-api.ap-northeast-1.amazonaws.com/dbread",requestOptions)
     .then(response=> response.json())
@@ -25,7 +25,7 @@ class GetMessage extends React.Component {
         <ul>
           {this.state.Messages.map((Message, i) => {
             console.log(this.state.Messages)
-            return <li key={i}>{Message.sort_key}</li>;
+            return <li key={Message.message}>{Message.message}</li>;
           })}
         </ul>
       </div>
